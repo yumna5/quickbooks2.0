@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <img src="assets/logo.jpg" style="width:200px;height: auto;">
+    <h1 style="font-family: Palatino; font-size: 50px;">Better than Quickbooks</h1>
+    <p>Fill in the fields below:</p>
+    <form action = "/" method="POST">
+        <label for="Client">Client:</label><br>
+        <input type="text" id="Client" name="Client" value="{{.Name}}"> <br>
+        <label for="Guards">Guards:</label><br>
+        <input type="text" id="Guards" name="Guards" value="{{.Guards}}"><br>
+        <label for="Hours">Hours/Day:</label><br>
+        <input type="text" id="Hours" name="Hours" value="{{.Hours}}"><br>
+        <label for="Occurrences">Days/Week (ex: 1,1 means 1 day on week 1 and 1 day on week 2):</label><br>
+        <input type="text" id="Occurrences" name="Occurrences" value="{{.Occurrences}}"><br>
+        <label for="Rate">Rate ($/hr):</label><br>
+        <input type="text" id="Rate" name="Rate" value="{{.Rate}}"><br>
+        <label for="Overtime"># of Overtime Days:</label><br>
+        <input type="text" id="Overtime" name="Overtime" value="{{.Overtime}}"><br>
+        <label for="LateHours">Late Hours:</label><br>
+        <input type="text" id="LateHours" name="LateHours" value="{{.LateHours}}"><br><br>
+        <input type="submit" value="Submit">
+        <input type="button" value="Reset" onclick="clearForm()">
+    </form>
+
+    <script>
+        function clearForm() {
+            // Clear form fields by resetting their value attributes
+            document.getElementById("Client").value = "";
+            document.getElementById("Guards").value = "";
+            document.getElementById("Hours").value = "";
+            document.getElementById("Occurrences").value = "";
+            document.getElementById("Rate").value = "";
+            document.getElementById("Overtime").value = "";
+            document.getElementById("LateHours").value = "";
+
+        }
+    </script>
+    
+    {{if .Name}}
+    <h2>Form Data Submitted:</h2>
+    <p>Name: {{.Name}}</p>
+    <p>Amount owed: {{.Result}}</p>
+    {{end}}
+
+</body>
+</html>
