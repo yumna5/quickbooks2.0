@@ -94,7 +94,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	t, err := template.ParseFiles("homepage.html")
+	t, err := template.ParseFiles("index.html")
 	if err != nil {
 		fmt.Println("Error parsing html file: ", err)
 	}
