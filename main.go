@@ -6,6 +6,7 @@ import (
 	"log"
 	"math"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -24,7 +25,11 @@ type ClientObj struct {
 func main() {
 	http.HandleFunc("/", formHandler)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default to port 3000 if no PORT variable is set (for local development)
+	}
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func (c ClientObj) TotalPay() float64 {
