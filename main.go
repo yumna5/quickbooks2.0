@@ -16,7 +16,7 @@ type ClientObj struct {
 	Guards      int
 	Hours       int
 	Occurrences []int
-	Rate        int
+	Rate        float64
 	Overtime    int
 	LateHours   int
 	Result      float64
@@ -48,7 +48,7 @@ func (c ClientObj) TotalPay() float64 {
 		totalHours -= overtimeHours
 	}
 
-	totalPay := float64(totalHours*c.Rate + overtimeHours*(c.Rate*2))
+	totalPay := float64(totalHours)*c.Rate + float64(overtimeHours)*(c.Rate*2)
 	totalPay *= 1.13
 	return totalPay
 
@@ -80,7 +80,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		obj.Occurrences = occIntArray
 
 		rateStr := r.FormValue("Rate")
-		obj.Rate, _ = strconv.Atoi(rateStr)
+		obj.Rate, _ = strconv.ParseFloat(rateStr, 64)
 
 		overtimeStr := r.FormValue("Overtime")
 		obj.Overtime, _ = strconv.Atoi(overtimeStr)
